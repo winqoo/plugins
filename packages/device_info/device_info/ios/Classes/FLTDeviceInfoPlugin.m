@@ -21,19 +21,19 @@
     uname(&un);
 
     result(@{
-      @"name" : [device name],
-      @"systemName" : [device systemName],
-      @"systemVersion" : [device systemVersion],
-      @"model" : [device model],
-      @"localizedModel" : [device localizedModel],
-      @"identifierForVendor" : [[device identifierForVendor] UUIDString],
-      @"isPhysicalDevice" : [self isDevicePhysical],
+      @"name" : [device name] != nil ? [device name] : @"",
+      @"systemName" : [device systemName] != nil ? [device systemName] : @"",
+      @"systemVersion" : [device systemVersion] != nil ? [device systemVersion] : @"",
+      @"model" : [device model] != nil ? [device model] : @"",
+      @"localizedModel" : [device localizedModel] != nil ? [device localizedModel] : @"",
+      @"identifierForVendor" : [[device identifierForVendor] UUIDString] != nil ? [[device identifierForVendor] UUIDString] : @"",
+      @"isPhysicalDevice" : [self isDevicePhysical] != nil ? [self isDevicePhysical] : @"",
       @"utsname" : @{
-        @"sysname" : @(un.sysname),
-        @"nodename" : @(un.nodename),
-        @"release" : @(un.release),
-        @"version" : @(un.version),
-        @"machine" : @(un.machine),
+        @"sysname" : un.sysname != nil ?  @(un.sysname) : @"",
+        @"nodename" : un.nodename != nil ? @(un.nodename) : @"",
+        @"release" :un.release != nil ?  @(un.release) : @"",
+        @"version" : un.version != nil ? @(un.version) : @"",
+        @"machine" : un.machine!= nil ? @(un.machine) : @"",
       }
     });
   } else {
