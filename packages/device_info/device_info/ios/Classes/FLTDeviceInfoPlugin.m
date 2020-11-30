@@ -21,24 +21,32 @@
     uname(&un);
 
     result(@{
-      @"name" : [device name] != nil ? [device name] : @"",
-      @"systemName" : [device systemName] != nil ? [device systemName] : @"",
-      @"systemVersion" : [device systemVersion] != nil ? [device systemVersion] : @"",
-      @"model" : [device model] != nil ? [device model] : @"",
-      @"localizedModel" : [device localizedModel] != nil ? [device localizedModel] : @"",
-      @"identifierForVendor" : [[device identifierForVendor] UUIDString] != nil ? [[device identifierForVendor] UUIDString] : @"",
-      @"isPhysicalDevice" : [self isDevicePhysical] != nil ? [self isDevicePhysical] : @"",
+      @"name" : [self _safeValueFor:[device name] whenNil:@""]
+      @"systemName" : [self _safeValueFor:[device systemName] whenNil:@""],
+      @"systemVersion" : [self _safeValueFor:[device systemVersion] whenNil:@""],
+      @"model" : [self _safeValueFor:[device model] whenNil:@""],
+      @"localizedModel" : [self _safeValueFor:[device localizedModel] whenNil:@""],
+      @"identifierForVendor" : [self _safeValueFor:[device identifierForVendor] whenNil:@""],
+      @"isPhysicalDevice" : [self _safeValueFor:[self isDevicePhysical] whenNil:@(NO)],
       @"utsname" : @{
-        @"sysname" : un.sysname != nil ?  @(un.sysname) : @"",
-        @"nodename" : un.nodename != nil ? @(un.nodename) : @"",
-        @"release" :un.release != nil ?  @(un.release) : @"",
-        @"version" : un.version != nil ? @(un.version) : @"",
-        @"machine" : un.machine!= nil ? @(un.machine) : @"",
+        @"sysname" : @self _safeValueFor un.sysname  whenNil : @"",
+        @"nodename" : @self _safeValueFor un.nodename  whenNil : @"",
+        @"release" : @self _safeValueFor un.release  whenNil : @"",
+        @"version" : @self _safeValueFor un.version  whenNil : @"",
+        @"machine" : @self _safeValueFor un.machine  whenNil : @"",
       }
     });
   } else {
     result(FlutterMethodNotImplemented);
   }
+}
+
+-(id)_safeValueFor:(id)attribute whenNil:(id)defaultValue {
+  if (attribute && attribute != nil && attribute != [NSNull null]) {
+    return attribute;
+  }
+
+  return defaultValue;
 }
 
 // return value is false if code is run on a simulator
