@@ -29,11 +29,11 @@
       @"identifierForVendor" : [self _safeValueFor:[device identifierForVendor] whenNil:@""],
       @"isPhysicalDevice" : [self _safeValueFor:[self isDevicePhysical] whenNil:@(NO)],
       @"utsname" : @{
-        @"sysname" : @self _safeValueFor un.sysname  whenNil : @"",
-        @"nodename" : @self _safeValueFor un.nodename  whenNil : @"",
-        @"release" : @self _safeValueFor un.release  whenNil : @"",
-        @"version" : @self _safeValueFor un.version  whenNil : @"",
-        @"machine" : @self _safeValueFor un.machine  whenNil : @"",
+        @"sysname" : [self _safeValueFor:@(un.sysname) whenNil:@""],
+        @"nodename" : [self _safeValueFor:@(un.nodename) whenNil:@""],
+        @"release" : [self _safeValueFor:@(un.release) whenNil:@""],
+        @"version" : [self _safeValueFor:@(un.version) whenNil:@""],
+        @"machine" : [self _safeValueFor:@(un.machine) whenNil:@""],
       }
     });
   } else {
