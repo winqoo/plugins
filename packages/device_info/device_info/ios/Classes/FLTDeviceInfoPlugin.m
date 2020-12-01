@@ -26,7 +26,7 @@
       @"systemVersion" : [self _safeValueFor:[device systemVersion] whenNil:@""],
       @"model" : [self _safeValueFor:[device model] whenNil:@""],
       @"localizedModel" : [self _safeValueFor:[device localizedModel] whenNil:@""],
-      @"identifierForVendor" : [self _safeValueFor:[device identifierForVendor] whenNil:@""],
+      @"identifierForVendor" : [self _safeValueFor:[[device identifierForVendor] UUIDString] whenNil:@""],
       @"isPhysicalDevice" : [self _safeValueFor:[self isDevicePhysical] whenNil:@(NO)],
       @"utsname" : @{
         @"sysname" : [self _safeValueFor:@(un.sysname) whenNil:@""],
