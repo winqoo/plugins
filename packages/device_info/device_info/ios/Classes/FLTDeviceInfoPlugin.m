@@ -21,7 +21,7 @@
     uname(&un);
 
     result(@{
-      @"name" : [self _safeValueFor:[device name] whenNil:@""]
+      @"name" : [self _safeValueFor:[device name] whenNil:@""],
       @"systemName" : [self _safeValueFor:[device systemName] whenNil:@""],
       @"systemVersion" : [self _safeValueFor:[device systemVersion] whenNil:@""],
       @"model" : [self _safeValueFor:[device model] whenNil:@""],
